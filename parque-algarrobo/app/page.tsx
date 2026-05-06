@@ -4,6 +4,8 @@ import Parcelas from '@/components/Parcelas'
 import Galeria from '@/components/Galeria'
 import Plano from '@/components/Plano'
 import QueOfrecemos from '@/components/QueOfrecemos'
+import Carrusel from '@/components/Carrusel'
+import Ubicacion from '@/components/Ubicacion'
 
 export default function Home() {
   return (
@@ -14,6 +16,8 @@ export default function Home() {
       <Galeria />
       <Plano />
       <QueOfrecemos />
+      <Carrusel />
+      <Ubicacion />
     </main>
   )
 }
