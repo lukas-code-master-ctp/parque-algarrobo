@@ -6,6 +6,8 @@ import Plano from '@/components/Plano'
 import QueOfrecemos from '@/components/QueOfrecemos'
 import Carrusel from '@/components/Carrusel'
 import Ubicacion from '@/components/Ubicacion'
+import Contacto from '@/components/Contacto'
+import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
@@ -18,6 +20,8 @@ export default function Home() {
       <QueOfrecemos />
       <Carrusel />
       <Ubicacion />
+      <Contacto />
+      <Footer />
     </main>
   )
 }
