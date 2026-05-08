@@ -28,10 +28,10 @@ export default function Galeria() {
   }, [lightboxIndex])
 
   return (
-    <section id="galeria" className="flex" style={{ lineHeight: 0 }}>
+    <section id="galeria" className="flex flex-col md:flex-row" style={{ lineHeight: 0 }}>
 
-      {/* Panel izquierdo */}
-      <div className="w-1/5 md:w-1/4 flex-shrink-0 relative overflow-hidden">
+      {/* Franja superior (mobile) / Panel izquierdo (desktop) */}
+      <div className="w-full h-32 md:w-1/4 md:h-auto flex-shrink-0 relative overflow-hidden">
         <Image
           src="/galeria/galeria-5.jpg"
           alt="Galería fondo"
@@ -51,9 +51,9 @@ export default function Galeria() {
           >
             Galería
           </h2>
-          <div className="w-10 h-px mx-auto" style={{ backgroundColor: 'rgba(255,255,255,0.5)', marginTop: '1.5rem', marginBottom: '1.5rem' }} />
+          <div className="w-10 h-px mx-auto hidden md:block" style={{ backgroundColor: 'rgba(255,255,255,0.5)', marginTop: '1.5rem', marginBottom: '1.5rem' }} />
           <p
-            className="italic font-light text-sm leading-relaxed"
+            className="italic font-light text-sm leading-relaxed hidden md:block"
             style={{ fontFamily: 'var(--font-montserrat), sans-serif', color: 'rgba(255,255,255,0.75)' }}
           >
             Una mirada a las parcelas
