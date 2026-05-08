@@ -1,8 +1,6 @@
 import { Resend } from 'resend'
 import { NextRequest, NextResponse } from 'next/server'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 interface ContactBody {
   nombre: string
   email: string
@@ -37,6 +35,8 @@ export async function POST(request: NextRequest) {
   if (!contactEmail) {
     return NextResponse.json({ error: 'Configuración de email faltante' }, { status: 500 })
   }
+
+  const resend = new Resend(process.env.RESEND_API_KEY)
 
   try {
     await resend.emails.send({
