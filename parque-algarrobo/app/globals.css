@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+/* Bacalisties — self-hosted */
+@font-face {
+  font-family: 'Bacalisties';
+  src: url('/fonts/Bacalisties.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   /* Colores */
   --color-dark: #1a1a1a;
@@ -7,6 +16,9 @@
   --color-warm: #faf9f7;
   --color-gold: #c9a84c;
   --color-gray-text: #4a4a4a;
+
+  /* Tipografía — apunta Bacalisties a la variable que usan los componentes */
+  --font-cormorant: 'Bacalisties';
 }
 
 /* Ken Burns animation */

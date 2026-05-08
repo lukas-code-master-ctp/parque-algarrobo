@@ -53,7 +53,7 @@ export default function Contacto() {
           <p className="text-xs tracking-[0.3em] uppercase mb-3" style={{ fontFamily: 'var(--font-montserrat), sans-serif', color: 'var(--color-gold)' }}>
             Escríbenos
           </p>
-          <h2 className="italic text-6xl md:text-7xl text-white" style={{ fontFamily: 'var(--font-cormorant), serif' }}>
+          <h2 className="italic text-4xl md:text-5xl text-white" style={{ fontFamily: 'var(--font-cormorant), serif' }}>
             Contacto
           </h2>
           <div className="w-12 h-px mx-auto mt-6" style={{ backgroundColor: 'var(--color-gold)' }} />
@@ -65,7 +65,7 @@ export default function Contacto() {
         {status === 'success' ? (
           <div className="text-center py-12">
             <div className="text-5xl mb-4" style={{ color: 'var(--color-gold)' }}>✓</div>
-            <h3 className="italic text-3xl text-white mb-3" style={{ fontFamily: 'var(--font-cormorant), serif' }}>
+            <h3 className="italic text-2xl text-white mb-3" style={{ fontFamily: 'var(--font-cormorant), serif' }}>
               ¡Mensaje enviado!
             </h3>
             <p className="font-light text-sm" style={{ fontFamily: 'var(--font-montserrat), sans-serif', color: 'rgba(255,255,255,0.6)' }}>

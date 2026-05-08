@@ -28,42 +28,66 @@ export default function Galeria() {
   }, [lightboxIndex])
 
   return (
-    <section id="galeria" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="text-center mb-16">
-          <p className="text-xs tracking-[0.3em] uppercase mb-3" style={{ fontFamily: 'var(--font-montserrat), sans-serif', color: 'var(--color-gold)' }}>
-            Imágenes
-          </p>
-          <h2 className="italic text-6xl md:text-7xl" style={{ fontFamily: 'var(--font-cormorant), serif', color: 'var(--color-dark)' }}>
+    <section id="galeria" className="flex" style={{ lineHeight: 0 }}>
+
+      {/* Panel izquierdo */}
+      <div className="w-1/5 md:w-1/4 flex-shrink-0 relative overflow-hidden">
+        <Image
+          src="/galeria/galeria-5.jpg"
+          alt="Galería fondo"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.55)' }} />
+        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+          <h2
+            className="italic text-white"
+            style={{
+              fontFamily: 'var(--font-cormorant), serif',
+              fontSize: 'clamp(2rem, 3.5vw, 3.5rem)',
+              lineHeight: 1.1,
+            }}
+          >
             Galería
           </h2>
-          <div className="w-12 h-px mx-auto mt-6" style={{ backgroundColor: 'var(--color-gold)' }} />
-        </div>
-
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
-          {IMAGES.map((img, idx) => (
-            <div
-              key={img.src}
-              className="break-inside-avoid cursor-pointer overflow-hidden group"
-              onClick={() => setLightboxIndex(idx)}
-            >
-              <Image
-                src={img.src}
-                alt={img.alt}
-                width={600}
-                height={400}
-                className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
-              />
-            </div>
-          ))}
+          <div className="w-10 h-px mx-auto" style={{ backgroundColor: 'rgba(255,255,255,0.5)', marginTop: '1.5rem', marginBottom: '1.5rem' }} />
+          <p
+            className="italic font-light text-sm leading-relaxed"
+            style={{ fontFamily: 'var(--font-montserrat), sans-serif', color: 'rgba(255,255,255,0.75)' }}
+          >
+            Una mirada a las parcelas
+          </p>
         </div>
       </div>
 
+      {/* Grid de fotos */}
+      <div
+        className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4"
+        style={{ gridAutoRows: '170px' }}
+      >
+        {IMAGES.map((img, idx) => (
+          <div
+            key={img.src}
+            className="relative cursor-pointer overflow-hidden group"
+            onClick={() => setLightboxIndex(idx)}
+          >
+            <Image
+              src={img.src}
+              alt={img.alt}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              loading={idx < 8 ? 'eager' : 'lazy'}
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Lightbox */}
       {lightboxIndex !== null && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center"
-          style={{ backgroundColor: 'rgba(0,0,0,0.9)', animation: 'fade-in 0.2s ease' }}
+          style={{ backgroundColor: 'rgba(0,0,0,0.92)', animation: 'fade-in 0.2s ease' }}
           onClick={() => setLightboxIndex(null)}
         >
           <div

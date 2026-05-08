@@ -10,10 +10,10 @@ export default function Ubicacion() {
     <section id="ubicacion" className="py-24" style={{ backgroundColor: 'var(--color-warm)' }}>
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
-          <p className="text-xs tracking-[0.3em] uppercase mb-3" style={{ fontFamily: 'var(--font-montserrat), sans-serif', color: 'var(--color-gold)' }}>
+          <p className="text-xs tracking-[0.3em] uppercase mb-8" style={{ fontFamily: 'var(--font-montserrat), sans-serif', color: 'var(--color-gold)' }}>
             Cómo Llegar
           </p>
-          <h2 className="italic text-6xl md:text-7xl" style={{ fontFamily: 'var(--font-cormorant), serif', color: 'var(--color-dark)' }}>
+          <h2 className="italic text-4xl md:text-5xl" style={{ fontFamily: 'var(--font-cormorant), serif', color: 'var(--color-dark)' }}>
             Ubicación
           </h2>
           <div className="w-12 h-px mx-auto mt-6" style={{ backgroundColor: 'var(--color-gold)' }} />

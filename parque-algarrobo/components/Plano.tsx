@@ -1,5 +1,7 @@
 'use client'
 
+import { useState } from 'react'
+
 const DOWNLOADS = [
   {
     title: 'Plano del Proyecto',
@@ -35,6 +37,8 @@ const DOWNLOADS = [
 ]
 
 export default function Plano() {
+  const [hovered, setHovered] = useState<number | null>(null)
+
   return (
     <section id="plano" className="py-24" style={{ backgroundColor: 'var(--color-warm)' }}>
       <div className="max-w-5xl mx-auto px-6">
@@ -42,29 +46,55 @@ export default function Plano() {
           <p className="text-xs tracking-[0.3em] uppercase mb-3" style={{ fontFamily: 'var(--font-montserrat), sans-serif', color: 'var(--color-gold)' }}>
             Documentos
           </p>
-          <h2 className="italic text-6xl md:text-7xl" style={{ fontFamily: 'var(--font-cormorant), serif', color: 'var(--color-dark)' }}>
+          <h2 className="italic text-4xl md:text-5xl" style={{ fontFamily: 'var(--font-cormorant), serif', color: 'var(--color-dark)' }}>
             Plano del Proyecto
           </h2>
           <div className="w-12 h-px mx-auto mt-6" style={{ backgroundColor: 'var(--color-gold)' }} />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {DOWNLOADS.map((doc) => (
-            <div key={doc.file} className="flex flex-col items-center text-center p-8 border border-gray-200 bg-white hover:shadow-lg transition-shadow duration-300">
+          {DOWNLOADS.map((doc, idx) => (
+            <div
+              key={doc.file}
+              className="flex flex-col items-center text-center p-8 border border-gray-200 bg-white transition-shadow duration-300"
+              style={{ boxShadow: hovered === idx ? '0 10px 25px rgba(0,0,0,0.1)' : 'none' }}
+              onMouseEnter={() => setHovered(idx)}
+              onMouseLeave={() => setHovered(null)}
+            >
               <div className="mb-4" style={{ color: 'var(--color-forest)' }}>{doc.icon}</div>
-              <h3 className="font-bold text-sm tracking-wide uppercase mb-3" style={{ fontFamily: 'var(--font-montserrat), sans-serif', color: 'var(--color-dark)' }}>
+              <h3
+                className="font-bold text-sm tracking-wide uppercase mb-3"
+                style={{ fontFamily: 'var(--font-montserrat), sans-serif', color: 'var(--color-dark)' }}
+              >
                 {doc.title}
               </h3>
-              <p className="font-light text-sm leading-relaxed flex-1 mb-6" style={{ fontFamily: 'var(--font-montserrat), sans-serif', color: 'var(--color-gray-text)' }}>
+              <p
+                className="font-light text-sm leading-relaxed flex-1 mb-6"
+                style={{
+                  fontFamily: 'var(--font-montserrat), sans-serif',
+                  color: hovered === idx ? '#000000' : '#9ca3af',
+                  transition: 'color 0.3s',
+                }}
+              >
                 {doc.description}
               </p>
               <a
                 href={doc.file}
                 download
-                className="inline-flex items-center gap-2 px-6 py-2.5 border text-sm tracking-wider transition-all duration-300 hover:text-white"
-                style={{ borderColor: 'var(--color-dark)', color: 'var(--color-dark)', fontFamily: 'var(--font-montserrat), sans-serif' }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--color-dark)' }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLAnchorElement).style.backgroundColor = '' }}
+                className="inline-flex items-center gap-2 px-6 py-2.5 border text-sm tracking-wider transition-all duration-300"
+                style={{
+                  borderColor: 'var(--color-dark)',
+                  color: 'var(--color-dark)',
+                  fontFamily: 'var(--font-montserrat), sans-serif',
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.backgroundColor = 'var(--color-dark)'
+                  ;(e.currentTarget as HTMLAnchorElement).style.color = 'white'
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.backgroundColor = ''
+                  ;(e.currentTarget as HTMLAnchorElement).style.color = 'var(--color-dark)'
+                }}
               >
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />

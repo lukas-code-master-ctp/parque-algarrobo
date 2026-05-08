@@ -16,7 +16,7 @@ export default function Footer() {
           <span className="font-bold tracking-[0.25em] text-xs uppercase" style={{ fontFamily: 'var(--font-montserrat), sans-serif', color: 'rgba(255,255,255,0.6)' }}>
             PARQUE
           </span>
-          <span className="italic text-3xl leading-none text-white" style={{ fontFamily: 'var(--font-cormorant), serif' }}>
+          <span className="italic text-2xl leading-none text-white" style={{ fontFamily: 'var(--font-cormorant), serif' }}>
             Algarrobo
           </span>
         </a>

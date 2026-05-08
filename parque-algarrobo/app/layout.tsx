@@ -1,14 +1,8 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, Montserrat } from 'next/font/google'
+import { Montserrat } from 'next/font/google'
 import './globals.css'
 
-const cormorant = Cormorant_Garamond({
-  subsets: ['latin'],
-  weight: ['300', '400', '600', '700'],
-  style: ['normal', 'italic'],
-  variable: '--font-cormorant',
-  display: 'swap',
-})
+// Amsterdam One se carga via @font-face en globals.css
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -39,7 +33,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${cormorant.variable} ${montserrat.variable}`}
+      className={montserrat.variable}
     >
       <body className="antialiased" style={{ fontFamily: 'var(--font-montserrat), sans-serif' }}>
         {children}
