@@ -1,4 +1,3 @@
-import { Resend } from 'resend'
 import { NextRequest, NextResponse } from 'next/server'
 
 interface ContactBody {
@@ -31,50 +30,25 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Email inválido' }, { status: 400 })
   }
 
-  const contactEmail = process.env.CONTACT_EMAIL
-  if (!contactEmail) {
-    return NextResponse.json({ error: 'Configuración de email faltante' }, { status: 500 })
+  const webhookUrl = process.env.GOOGLE_SHEETS_WEBHOOK_URL
+  if (!webhookUrl) {
+    return NextResponse.json({ error: 'Webhook no configurado' }, { status: 500 })
   }
 
-  const resend = new Resend(process.env.RESEND_API_KEY)
-
   try {
-    await resend.emails.send({
-      from: 'Parque Algarrobo <noreply@parquealgarrobo.cl>',
-      to: contactEmail,
-      replyTo: email,
-      subject: `Nuevo mensaje de ${nombre} — Parque Algarrobo`,
-      html: `
-        <div style="font-family:sans-serif;max-width:600px;margin:0 auto;">
-          <h2 style="color:#1a1a1a;border-bottom:2px solid #c9a84c;padding-bottom:8px;">
-            Nuevo mensaje desde parquealgarrobo.cl
-          </h2>
-          <table style="width:100%;border-collapse:collapse;margin-top:16px;">
-            <tr>
-              <td style="padding:8px 0;font-weight:bold;color:#4a4a4a;width:120px;">Nombre:</td>
-              <td style="padding:8px 0;">${nombre}</td>
-            </tr>
-            <tr>
-              <td style="padding:8px 0;font-weight:bold;color:#4a4a4a;">Email:</td>
-              <td style="padding:8px 0;"><a href="mailto:${email}">${email}</a></td>
-            </tr>
-            <tr>
-              <td style="padding:8px 0;font-weight:bold;color:#4a4a4a;">Teléfono:</td>
-              <td style="padding:8px 0;">${telefono || '—'}</td>
-            </tr>
-          </table>
-          <div style="margin-top:16px;">
-            <p style="font-weight:bold;color:#4a4a4a;margin-bottom:8px;">Mensaje:</p>
-            <p style="background:#f5f5f5;padding:16px;border-left:3px solid #c9a84c;line-height:1.6;">
-              ${mensaje.replace(/\n/g, '<br />')}
-            </p>
-          </div>
-        </div>
-      `,
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, email, telefono, mensaje }),
     })
+
+    if (!response.ok) {
+      throw new Error(`Apps Script respondió con status ${response.status}`)
+    }
+
     return NextResponse.json({ ok: true })
   } catch (error) {
-    console.error('Error enviando email:', error)
-    return NextResponse.json({ error: 'Error al enviar el mensaje' }, { status: 500 })
+    console.error('Error enviando a Google Sheets:', error)
+    return NextResponse.json({ error: 'Error al registrar el mensaje' }, { status: 500 })
   }
 }
