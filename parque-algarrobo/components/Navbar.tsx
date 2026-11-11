@@ -1,16 +1,22 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 
 const NAV_LINKS = [
-  { label: 'Parcelas', href: '#parcelas' },
-  { label: 'Galería', href: '#galeria' },
-  { label: 'Plano', href: '#plano' },
-  { label: 'Ubicación', href: '#ubicacion' },
+  { label: 'Parcelas', href: '/#parcelas' },
+  { label: 'Galería', href: '/#galeria' },
+  { label: 'Plano', href: '/#plano' },
+  { label: 'Ubicación', href: '/#ubicacion' },
+  { label: 'Master plan', href: '/master-plan' },
 ]
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false)
+  const [scrolledDown, setScrolled] = useState(false)
+  // fuera del home no hay hero oscuro detrás: navbar siempre sólido
+  const pathname = usePathname()
+  const scrolled = scrolledDown || pathname !== '/'
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -27,7 +33,7 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex flex-col leading-none" style={{ transform: 'translateY(-4px)' }}>
+        <Link href="/" className="flex flex-col leading-none" style={{ transform: 'translateY(-4px)' }}>
           <span
             className="font-bold tracking-[0.2em] text-xs uppercase transition-colors"
             style={{
@@ -47,12 +53,12 @@ export default function Navbar() {
           >
             Algarrobo
           </span>
-        </a>
+        </Link>
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
           {NAV_LINKS.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               className="text-sm font-light tracking-wide transition-colors hover:opacity-70"
@@ -62,10 +68,10 @@ export default function Navbar() {
               }}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#contacto"
+          <Link
+            href="/#contacto"
             className="ml-4 px-5 py-2 border text-sm font-light tracking-wider transition-all hover:opacity-80"
             style={{
               fontFamily: 'var(--font-montserrat), sans-serif',
@@ -74,7 +80,7 @@ export default function Navbar() {
             }}
           >
             Contáctanos
-          </a>
+          </Link>
         </nav>
 
         {/* Mobile hamburger */}
@@ -102,7 +108,7 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden bg-white border-t border-gray-100 px-6 py-4 flex flex-col gap-4">
           {NAV_LINKS.map((link) => (
-            <a
+            <Link
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
@@ -110,10 +116,10 @@ export default function Navbar() {
               style={{ fontFamily: 'var(--font-montserrat), sans-serif', color: 'var(--color-dark)' }}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#contacto"
+          <Link
+            href="/#contacto"
             onClick={() => setMenuOpen(false)}
             className="mt-2 px-5 py-2 border text-sm text-center transition-all"
             style={{
@@ -123,7 +129,7 @@ export default function Navbar() {
             }}
           >
             Contáctanos
-          </a>
+          </Link>
         </div>
       )}
     </header>
